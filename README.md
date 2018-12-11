@@ -96,3 +96,16 @@ still be compilable with cmake and make./
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
+-------
+
+# Writeup
+## Reflection
+
+The parameter tuning was done with the twiddling and manual tuning afterwards.
+The D component is increased (and the I component decreased) because oscallating happened quite quickly.
+
+The P component increases the reaction of the system, but was diminshed after twiddling because the steering reacted not smooth enough.
+Here, the I component helps to smoothen up the driving.
+
+Moreover, only with tuning the car still leaves the road. But with the adapting the speed to the cte, it was possible.
+Speed is decreased when the cte goes larger, with an offset of 0.2.
