@@ -102,10 +102,21 @@ A well written README file can enhance your project and portfolio.  Develop your
 ## Reflection
 
 The parameter tuning was done with the twiddling and manual tuning afterwards.
-The D component is increased (and the I component decreased) because oscallating happened quite quickly.
+
+The *P component* increases p_error proportional to the CTE. This has the risk that the car will overshoot and never reach the target trajectory.
+Is it too high, the car will steadily overshoot and keep on constant CTE which will not reduced by itself.
+Furthermore, this will also lead to oscallation.
+Is it set too low the vehicle will never target trajectory because the correction is too small. Moreover, in curves, the vehicle dynamics make it very hard for this compoenent to keep the vehicle on the target trajectory.
+
+In order to reduce the potential oscallation, the *D component* is introduced that takes the derivate of CTE into account.
+So, the D part looks at the future and controls the vehicle proactively. Because this is largely required for lane keeping, the D part is set to a very high value.
+A too low D part doesn't take into account the of the derivate and influence of the P part predominates.
+
+Nevertheless, the car couldn't keep track with a PD controller because a constant offset was set and the vehicle steers in one direction without any correction. Therefore, we sums up all the previous CTE (signed) and call this the *I component*.
+With the help of that one, the vehicle smoothens its steering and could correct the constant error.
+
 
 The P component increases the reaction of the system, but was diminshed after twiddling because the steering reacted not smooth enough.
-Here, the I component helps to smoothen up the driving.
 
 Moreover, only with tuning the car still leaves the road. But with the adapting the speed to the cte, it was possible.
 Speed is decreased when the cte goes larger, with an offset of 0.2.
